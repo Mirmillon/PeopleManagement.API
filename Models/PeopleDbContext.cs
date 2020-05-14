@@ -19,12 +19,25 @@ namespace PeopleManagement.API.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            // Code to seed data
+            //TABLE DATA
+            modelBuilder.Entity<Person>().ToTable("TD_Person");
+            modelBuilder.Entity<Mobile>().ToTable("TD_Mobile");          
+            //TABLE JOINTURE
+            modelBuilder.Entity<MobileUser>().ToTable("TJ_MobileUser");
+            //TABLE REFERENCE
+            modelBuilder.Entity<Country>().ToTable("TR_Country");
+            modelBuilder.Entity<TelephoneNumberFormat>().ToTable("TR_TelephoneNumberFormat");
+
+
         }
 
+        //TABLE DATA
         public DbSet<Person> Persons { get; set; }
-        public DbSet<Country> Countries { get; set; }
         public DbSet<Mobile> Mobiles { get; set; }
-        public DbSet<Landline> Landlines { get; set; }
+        //TABLE JOINTURE
+        public DbSet<MobileUser> MobileUsers { get; set; }
+        //TABLE REFERENCE
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<TelephoneNumberFormat> TelephoneNumberFormats { get; set; }
     }
 }

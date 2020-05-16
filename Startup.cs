@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using PeopleManagement.API.Models;
 using PeopleManagement.API.Repository;
 using PeopleManagement.API.Repository.IRepository;
@@ -37,8 +30,17 @@ namespace PeopleManagement.API
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IPhoneNumberRepository, PhoneNumberRepository>();
+            services.AddScoped<IEmailRepository, EmailRepository>();
+            services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IAdressRepository, AdressRepository>();
+            services.AddScoped<IHomeCountryRepository, HomeCountryRepository>();
             //IREPOSITORY TRE
             services.AddScoped<IConfidentialityRepository, ConfidentialityRepository>();
+            services.AddScoped<IUseRepository, UseRepository>();
+            services.AddScoped<IDeviceRepository, DeviceRepository>();
+            services.AddScoped<IGenderRepository, GenderRepository>();
+            services.AddScoped<INumberKindRepository, NumberKindRepository>();
+            services.AddScoped<IAdressKindRepository, AdressKindRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

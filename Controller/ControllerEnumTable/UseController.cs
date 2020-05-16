@@ -1,17 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PeopleManagement.API.Models;
+﻿using PeopleManagement.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PeopleManagement.API.Controller
+namespace PeopleManagement.API.Controller.ControllerEnumTable
 {
-    public class PhoneNumberController : ControllerBase
+    public class UseController
     {
         private readonly PeopleDbContext peopleDbContext;
 
-        public PhoneNumberController(PeopleDbContext peopleDbContext)
+        public UseController(PeopleDbContext peopleDbContext)
         {
             this.peopleDbContext = peopleDbContext;
         }

@@ -47,9 +47,9 @@ namespace PeopleManagement.API.Repository
             return await peopleDbContext.PhoneNumbers.FirstOrDefaultAsync(e => e.PhoneNumberId == pnId);
         }
 
-        public Task<IEnumerable<PhoneNumber>> GetPhoneNumbers(int personId)
+        public async Task<IEnumerable<PhoneNumber>> GetPhoneNumbers(int personId)
         {
-            throw new NotImplementedException();
+            return await peopleDbContext.PhoneNumbers.ToListAsync();
         }
 
         public async Task<PhoneNumber> UpdatePhoneNumber(PhoneNumber pn)

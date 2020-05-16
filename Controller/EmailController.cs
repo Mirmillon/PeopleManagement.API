@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace PeopleManagement.API.Controller
 {
-    public class PhoneNumberController : ControllerBase
+    public class EmailController : ControllerBase
     {
         private readonly PeopleDbContext peopleDbContext;
 
-        public PhoneNumberController(PeopleDbContext peopleDbContext)
+        public EmailController(PeopleDbContext peopleDbContext)
         {
             this.peopleDbContext = peopleDbContext;
         }

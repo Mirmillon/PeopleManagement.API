@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PeopleManagement.Models;
 using PeopleManagement.Models.EnumTable;
-
-
-
+using PeopleManagement.Models.EnumTable.People;
+using PeopleManagement.Models.Telecommunications;
 
 namespace PeopleManagement.API.Models
 {
@@ -22,30 +21,91 @@ namespace PeopleManagement.API.Models
             modelBuilder.Entity<Person>().ToTable("TD_Person");
             modelBuilder.Entity<PhoneNumber>().ToTable("TD_PhoneNumber");
             modelBuilder.Entity<Email>().ToTable("TD_Email");
+            modelBuilder.Entity<Adress>().ToTable("TD_Adress");
+            modelBuilder.Entity<Home>().ToTable("TD_Home");
+
+
             //TABLE JOINTURE
-            // modelBuilder.Entity<MobileUser>().ToTable("TJ_MobileUser");
+
+            //TelephoneNumberFormats
+            modelBuilder.Entity<TelephoneNumberFormat>()
+            .HasKey(t => new { t.CountryId, t.NumberKindId });
+
+            modelBuilder.Entity<TelephoneNumberFormat>()
+                .HasOne(pt => pt.Country)
+                .WithMany(p => p.TelephoneNumberFormats)
+                .HasForeignKey(pt => pt.CountryId);
+
+            modelBuilder.Entity<TelephoneNumberFormat>()
+                .HasOne(pt => pt.NumberKind)
+                .WithMany(t => t.TelephoneNumberFormats)
+                .HasForeignKey(pt => pt.NumberKindId);
+
+            modelBuilder.Entity<TelephoneNumberFormat>().ToTable("TJ_TelephoneNumberFormat");
+            //PhoneUsers
+            modelBuilder.Entity<PhoneUser>()
+           .HasKey(t => new { t.PersonId, t.PhoneNumberId });
+
+            modelBuilder.Entity<PhoneUser>()
+                .HasOne(pt => pt.Person)
+                .WithMany(p => p.PhoneUsers)
+                .HasForeignKey(pt => pt.PersonId);
+
+            modelBuilder.Entity<PhoneUser>()
+                .HasOne(pt => pt.PhoneNumber)
+                .WithMany(t => t.PhoneUsers)
+                .HasForeignKey(pt => pt.PhoneNumberId);
+
+            modelBuilder.Entity<PhoneUser>().ToTable("TJ_PhoneUser");
+
+            //HomeCountry
+            modelBuilder.Entity<HomeCountry>().ToTable("TJ_HomeCountry");
+
+            modelBuilder.Entity<HomeCountry>()
+           .HasKey(t => new { t.CountryId, t.HomeId });
+
+            modelBuilder.Entity<HomeCountry>()
+                .HasOne(pt => pt.Country)
+                .WithMany(p => p.HomeCountries)
+                .HasForeignKey(pt => pt.CountryId);
+
+            modelBuilder.Entity<HomeCountry>()
+                .HasOne(pt => pt.Home)
+                .WithMany(t => t.HomeCountries)
+                .HasForeignKey(pt => pt.HomeId);
+
+
             //TABLE REFERENCE
             modelBuilder.Entity<Country>().ToTable("TR_Country");
             // modelBuilder.Entity<TelephoneNumberFormat>().ToTable("TR_TelephoneNumberFormat");
-            //TABLE ENUM
+            //TABLE ENUM 
+            modelBuilder.Entity<AdressKind>().ToTable("TRE_AdressKind");
             modelBuilder.Entity<Confidentiality>().ToTable("TRE_Confidentiality");
             modelBuilder.Entity<Gender>().ToTable("TRE_Gender");
             modelBuilder.Entity<NumberKind>().ToTable("TRE_NumberKind");
             modelBuilder.Entity<Device>().ToTable("TRE_Device");
             modelBuilder.Entity<Use>().ToTable("TRE_Use");
-        }
+        } 
 
         //TABLE DATA
         public DbSet<Person> Persons { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<Email> Emails { get; set; }
 
+        public DbSet<Adress> Adresses { get; set; }
+
+        public DbSet<Home> Homes { get; set; }
+
+
         //TABLE JOINTURE
-        //public DbSet<MobileUser> MobileUsers { get; set; }
+        public DbSet<PhoneUser> PhoneUsers { get; set; }
+        public DbSet<TelephoneNumberFormat> TelephoneNumberFormats { get; set; }
+
+
 
         //TABLE REFERENCE
         public DbSet<Country> Countries { get; set; }
-        //public DbSet<TelephoneNumberFormat> TelephoneNumberFormats { get; set; }
+       
         
         //TABLE ENUM
         public DbSet<Confidentiality> Confidentialities { get; set; }
@@ -53,5 +113,6 @@ namespace PeopleManagement.API.Models
         public DbSet<NumberKind> NumberKinds { get; set; }
         public DbSet<Device> Devices { get; set; }
         public DbSet<Use> Uses { get; set; }
+        public DbSet<AdressKind> AdressKinds { get; set; }
     }
 }

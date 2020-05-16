@@ -12,6 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PeopleManagement.API.Models;
+using PeopleManagement.API.Repository;
+using PeopleManagement.API.Repository.IRepository;
+using PeopleManagement.API.Repository.IRepository.IRepositoryEnumTable;
+using PeopleManagement.API.Repository.RepositoryEnumTable;
 
 namespace PeopleManagement.API
 {
@@ -29,6 +33,12 @@ namespace PeopleManagement.API
         {
             services.AddDbContext<PeopleDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PeopleConnection")));
             services.AddControllers();
+            //IREPOSITORY
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IPhoneNumberRepository, PhoneNumberRepository>();
+            //IREPOSITORY TRE
+            services.AddScoped<IConfidentialityRepository, ConfidentialityRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

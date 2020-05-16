@@ -9,7 +9,7 @@ namespace PeopleManagement.API.Repository.IRepository
     interface ITelephoneNumberFormatRepository
     {
         Task<IEnumerable<TelephoneNumberFormat>> GetTelephoneNumberFormats();
-        Task<IEnumerable<TelephoneNumberFormat>> GetTelephoneNumberFormatByCountry(int countryId);
+        Task<IEnumerable<TelephoneNumberFormat>> GetTelephoneNumberFormatByCountry(string countryId);
         Task<TelephoneNumberFormat> AddTelephoneNumberFormat(TelephoneNumberFormat telephoneNumberFormat);
         Task<TelephoneNumberFormat> UpdateTelephoneNumberFormat(TelephoneNumberFormat telephoneNumberFormat);
         void DeleteTelephoneNumberFormat(int telephoneNumberFormatId);

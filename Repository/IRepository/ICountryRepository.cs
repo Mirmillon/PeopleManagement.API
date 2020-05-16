@@ -9,9 +9,9 @@ namespace PeopleManagement.API.Repository.IRepository
     interface ICountryRepository
     {
         Task<IEnumerable<Country>> GetCountrys();
-        Task<Country> GetCountry(int countryId);
+        Task<Country> GetCountry(string countryId);
         Task<Country> AddCountry(Country country);
         Task<Country> UpdateCountry(Country country);
-        void DeleteCountry(int countryId);
+        void DeleteCountry(string countryId);
     }
 }

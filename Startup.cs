@@ -9,6 +9,7 @@ using PeopleManagement.API.Repository;
 using PeopleManagement.API.Repository.IRepository;
 using PeopleManagement.API.Repository.IRepository.IRepositoryEnumTable;
 using PeopleManagement.API.Repository.RepositoryEnumTable;
+using PeopleManagement.Models.EnumTable.People;
 
 namespace PeopleManagement.API
 {
@@ -34,6 +35,8 @@ namespace PeopleManagement.API
             services.AddScoped<IHomeRepository, HomeRepository>();
             services.AddScoped<IAdressRepository, AdressRepository>();
             services.AddScoped<IHomeCountryRepository, HomeCountryRepository>();
+            services.AddScoped<ILanguageCountryRepository, LanguageCountryRepository>();
+            services.AddScoped<ILanguagePersonRepository, LanguagePersonRepository>();
             //IREPOSITORY TRE
             services.AddScoped<IConfidentialityRepository, ConfidentialityRepository>();
             services.AddScoped<IUseRepository, UseRepository>();
@@ -41,6 +44,8 @@ namespace PeopleManagement.API
             services.AddScoped<IGenderRepository, GenderRepository>();
             services.AddScoped<INumberKindRepository, NumberKindRepository>();
             services.AddScoped<IAdressKindRepository, AdressKindRepository>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

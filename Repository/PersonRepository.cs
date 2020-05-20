@@ -26,7 +26,7 @@ namespace PeopleManagement.API.Repository
             return result.Entity;
         }
 
-        public async void DeletePerson(int personId)
+        public async Task<Person> DeletePerson(int personId)
         {
             var result = await peopleDbContext.Persons
                                              .FirstOrDefaultAsync(e => e.PersonId == personId);
@@ -34,7 +34,10 @@ namespace PeopleManagement.API.Repository
             {
                 peopleDbContext.Persons.Remove(result);
                 await peopleDbContext.SaveChangesAsync();
+                return result;
             }
+
+            return null;
         }
 
         public async  Task<Person> GetPerson(int personId)

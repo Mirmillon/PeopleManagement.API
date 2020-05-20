@@ -74,6 +74,39 @@ namespace PeopleManagement.API.Models
                 .WithMany(t => t.HomeCountries)
                 .HasForeignKey(pt => pt.HomeId);
 
+            //LanguagePerson
+            modelBuilder.Entity<LanguagePerson>().ToTable("TJ_LanguagePerson");
+
+            modelBuilder.Entity<LanguagePerson>()
+           .HasKey(t => new { t.PersonId, t.LanguageId });
+
+            modelBuilder.Entity<LanguagePerson>()
+                .HasOne(pt => pt.Person)
+                .WithMany(p => p.LanguagePersons)
+                .HasForeignKey(pt => pt.PersonId);
+
+            modelBuilder.Entity<LanguagePerson>()
+                .HasOne(pt => pt.Language)
+                .WithMany(t => t.LanguagePersons)
+                .HasForeignKey(pt => pt.LanguageId);
+
+            //LanguageCountry
+            modelBuilder.Entity<LanguageCountry>().ToTable("TJ_LanguageCountry");
+
+
+            modelBuilder.Entity<LanguageCountry>()
+           .HasKey(t => new { t.CountryId, t.LanguageId });
+
+            modelBuilder.Entity<LanguageCountry>()
+                .HasOne(pt => pt.Country)
+                .WithMany(p => p.LanguageCountries)
+                .HasForeignKey(pt => pt.CountryId);
+
+            modelBuilder.Entity<LanguageCountry>()
+                .HasOne(pt => pt.Language)
+                .WithMany(t => t.LanguageCountries)
+                .HasForeignKey(pt => pt.LanguageId);
+
 
             //TABLE REFERENCE
             modelBuilder.Entity<Country>().ToTable("TR_Country");
@@ -85,6 +118,8 @@ namespace PeopleManagement.API.Models
             modelBuilder.Entity<NumberKind>().ToTable("TRE_NumberKind");
             modelBuilder.Entity<Device>().ToTable("TRE_Device");
             modelBuilder.Entity<Use>().ToTable("TRE_Use");
+            modelBuilder.Entity<Language>().ToTable("TRE_Language");
+            modelBuilder.Entity<LanguageLevel>().ToTable("TRE_LanguageLevel");
         } 
 
         //TABLE DATA
@@ -114,5 +149,7 @@ namespace PeopleManagement.API.Models
         public DbSet<Device> Devices { get; set; }
         public DbSet<Use> Uses { get; set; }
         public DbSet<AdressKind> AdressKinds { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<LanguageLevel> LanguageLevels { get; set; }
     }
 }

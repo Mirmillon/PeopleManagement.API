@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CcamManagement.API\CcamManagement.API.csproj" />
     <ProjectReference Include="..\PeopleManagement.Models\PeopleManagement.Models.csproj" />
   </ItemGroup>
 

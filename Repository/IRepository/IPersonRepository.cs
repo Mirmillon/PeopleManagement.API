@@ -12,6 +12,6 @@ namespace PeopleManagement.API.Repository.IRepository
         Task<Person> GetPerson(int personId);
         Task<Person> AddPerson(Person person);
         Task<Person> UpdatePerson(Person person);
-        void DeletePerson(int personId);
+        Task<Person> DeletePerson(int personId);
     }
 }

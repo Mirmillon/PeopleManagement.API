@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-using PeopleManagement.API.Repository;
 using PeopleManagement.API.Repository.IRepository;
 using PeopleManagement.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PeopleManagement.API.Controller
@@ -73,6 +69,49 @@ namespace PeopleManagement.API.Controller
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     "Error creating new employee record");
+            }
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Person>> UpdatePerson(int id, Person person)
+        {
+            try
+            {
+                if (id != person.PersonId)
+                    return BadRequest("Person ID mismatch");
+
+                var personToUpdate = await personRepository.GetPerson(id);
+
+                if (personToUpdate == null)
+                    return NotFound($"Person with Id = {id} not found");
+
+                return await personRepository.UpdatePerson(person);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error updating data");
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Person>> DeletePerson(int id)
+        {
+            try
+            {
+                var personToDelete = await personRepository.GetPerson(id);
+
+                if (personToDelete == null)
+                {
+                    return NotFound($"Person with Id = {id} not found");
+                }
+
+                return await personRepository.DeletePerson(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
             }
         }
     }
